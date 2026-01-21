@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'core',
 ]
 
 MIDDLEWARE = [
@@ -56,7 +57,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'FrontEnd')
+            os.path.join(BASE_DIR, 'react/dist')
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -117,4 +118,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-STATIC_URL = 'static/'
+# Actualiza estas líneas en settings.py
+STATIC_URL = '/assets/' 
+
+STATICFILES_DIRS = [
+    BASE_DIR / 'react' / 'dist' / 'assets', # O la carpeta donde Vite/CRA guarde el JS/CSS
+]
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'
