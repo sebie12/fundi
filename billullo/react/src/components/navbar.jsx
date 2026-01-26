@@ -10,10 +10,10 @@ export function Navbar({ setScreen }) {
             <a onClick={() => setScreen(0)} className='logoText'>{APP_NAME}</a>
         </div>
       <div className="tabs">
-        <a onClick={() => setScreen(1)} >New data</a>
-        <a onClick={() => setScreen(2)}>Profile</a>
-        <a onClick={() => setScreen(3)}>Consult</a>
+        <a onClick={() => setScreen(1)} >Log Activity</a>
+        <a onClick={() => setScreen(2)}>Consult</a>
       </div>
+      <a onClick={() => setScreen(3)}>Profile</a>
     </div>
   )
 }

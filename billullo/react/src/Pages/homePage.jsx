@@ -1,4 +1,8 @@
-import { useEffect } from "react"
+import {    
+    React, 
+    useEffect,
+    useState
+    } from "react"
 
 export function HomePage() {
     const [profile, setProfile] = useState(null);
@@ -16,7 +20,10 @@ export function HomePage() {
     }, [])
   return (
     <>
-        <h1>Welcome to Billullo</h1>
+        {
+        profile != null ? <h2>Welcome back, {profile.name}!</h2>
+        : <h2>Welcome to billullo! <br/>Please Set up your profile.</h2>
+        }
     </>
   )
 }

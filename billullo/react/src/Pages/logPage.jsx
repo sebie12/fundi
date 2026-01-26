@@ -1,6 +1,6 @@
 
 
-export function NewDataPage() {
+export function LogPage() {
   return (
     <>
       <Navbar setScreen={setScreen} />
