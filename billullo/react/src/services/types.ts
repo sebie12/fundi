@@ -1,7 +1,8 @@
 export interface User {
   id: number;
   name: string;
-  email: string;
+  lastName: string;
+  wallet: Wallet;
 }
 
 export interface Wallet {

@@ -2,6 +2,7 @@ import React from 'react'
 import { APP_NAME } from '../assets/constants'
 import logo from '../assets/logo.svg';
 import './navbar.css'
+import ProfileFrame from './ui/profileFrame';
 export function Navbar({ setScreen }) { 
   return (
     <div className="navbar">
@@ -13,7 +14,7 @@ export function Navbar({ setScreen }) {
         <a onClick={() => setScreen(1)} >Log Activity</a>
         <a onClick={() => setScreen(2)}>Consult</a>
       </div>
-      <a onClick={() => setScreen(3)}>Profile</a>
+      <a onClick={() => setScreen(3)}><ProfileFrame /></a>
     </div>
   )
 }

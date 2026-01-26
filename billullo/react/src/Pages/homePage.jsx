@@ -9,9 +9,9 @@ export function HomePage() {
     useEffect(() => {
         const fetchProfile = async () => {
             try {
-                const response = await fetch('/api/profile');
+                const response = await fetch('/api/users');
                 const data = await response.json();
-                setProfile(data);
+                setProfile(data[0]);
             } catch (error) {
                 console.error('Error fetching profile:', error);
             }
@@ -21,7 +21,7 @@ export function HomePage() {
   return (
     <>
         {
-        profile != null ? <h2>Welcome back, {profile.name}!</h2>
+        profile != null ? <h2>Welcome back, {profile.username}!</h2>
         : <h2>Welcome to billullo! <br/>Please Set up your profile.</h2>
         }
     </>

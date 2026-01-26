@@ -1,32 +1,62 @@
-import ApiClient from './apiClient';
 import { User, Wallet } from './types';
 
-class UserService {
-  private api: ApiClient;
-
-  constructor() {
-    this.api = new ApiClient();
+export class UserService {
+  async getWallets(): Promise<Response> {
+    const data = await fetch('/api/wallets');
+    return data;
   }
 
-  async getUsers(): Promise<User[]> {
-    return this.api.get<User[]>('/api/users');
+  async getWalletById(id: number): Promise<Response> {
+    const data = await fetch(`/api/wallets/${id}`);
+    return data;
   }
 
-  async getUserById(id: number): Promise<User> {
-    return this.api.get<User>(`/api/users/${id}`);
+  async createWallet(walletData: Omit<Wallet, 'id'>): Promise<Response> {
+    const data = await fetch('/api/wallets', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(walletData),
+    });
+    return data;
   }
 
-  async createUser(userData: Omit<User, 'id'>): Promise<User> {
-    return this.api.post<User>('/api/users', userData);
+  async getUsers(): Promise<Response> {
+    const data = await fetch('/api/users');
+    return data;
   }
 
-  async updateUser(id: number, userData: Partial<User>): Promise<User> {
-    return this.api.put<User>(`/api/users/${id}`, userData);
+  async getUserById(id: number): Promise<Response> {
+    const data = await fetch(`/api/users/${id}`);
+    return data;
   }
 
-  async deleteUser(id: number): Promise<void> {
-    return this.api.delete<void>(`/api/users/${id}`);
+  async createUser(userData: Omit<User, 'id'>): Promise<Response> {
+    const data = await fetch('/api/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(userData),
+    });
+    return data;
+  }
+
+  async updateUser(id: number, userData: Partial<User>): Promise<Response> {
+    const data = await fetch(`/api/users/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(userData),
+    });
+    return data;
+  }
+
+  async deleteUser(id: number): Promise<Response> {
+    return await fetch(`/api/users/${id}`, {
+      method: 'DELETE',
+    });
   }
 }
-
-export default UserService;

@@ -1,0 +1,11 @@
+#profile{
+    width: 60px; 
+    height: 60px; 
+    background-color: whitesmoke;
+    border-radius: 50%;
+}
+
+#profile:hover{
+    transition: 100ms;
+    box-shadow: 0 0 5px rgb(168, 162, 162);
+}

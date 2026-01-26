@@ -1,6 +1,6 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from core.views import WalletViewSet
+from .views import WalletViewSet
 from .views import UserViewSet
 
 router = DefaultRouter()
