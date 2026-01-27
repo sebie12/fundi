@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import "./common.css";
 import {UserService} from "../services/userService";
-import ProfileInfo from "../components/profileInfo";
+import ProfileInfo from "../components/profile/profileInfo";
+import GeneralProfileSetUp from "../components/profile/generalProfileSetUp";
 
 export function ProfilePage() {
   const userService = new UserService();
@@ -17,16 +18,10 @@ export function ProfilePage() {
       
       if (response.ok) {
         const data = await response.json();
-        setUserData(data[0]);
+        setUserData(data);
         
-        // Fetch wallet right after getting user data
-        if (data[0]?.wallet) {
-          const walletResponse = await userService.getWalletById(data[0].wallet);
-          if (walletResponse.ok) {
-            const walletData = await walletResponse.json();
-            setWalletData(walletData);
-          }
-        }
+        
+        
       }
     } catch (error) {
       console.error('Error fetching user data:', error);
@@ -50,8 +45,7 @@ export function ProfilePage() {
         
         {responseCode === 404 && (
           <div>
-            <h2>Set up your profile!</h2>
-            <p>User not found.</p>
+            <GeneralProfileSetUp/>
           </div>
         )}
         

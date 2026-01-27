@@ -1,15 +1,16 @@
 export interface User {
   id: number;
-  name: string;
-  lastName: string;
-  wallet: Wallet;
+  first_name: string;
+  last_Name: string;
 }
 
 export interface Wallet {
   id: number;
+  user: number;
   name: string;
   balance: number;
-  userId: number;
+  allTimeExpenses: number;
+  allTimeEarnings: number;
 }
 
 export interface ApiResponse<T> {

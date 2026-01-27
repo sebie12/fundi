@@ -16,6 +16,7 @@ export default function ProfileInfo({userData, walletData}) {
                 <div className="profileDetails">
                     <h2>Wallet Information</h2>
                     <div>
+                        <p><strong>Name: </strong> {walletData ? walletData.name : "No wallet found"}</p>
                         <p><strong>Wallet Balance:</strong> {walletData ? walletData.balance : "No wallet found"}</p>
                         <p><strong>All time expenses:</strong> {walletData ? walletData.alltimeExpenses : "No wallet found"}</p>
                     </div>

@@ -1,4 +1,5 @@
-import { User, Wallet } from './types';
+import { User } from './types';
+import { CreateWalletDTO } from './dtos';
 
 export class UserService {
   async getWallets(): Promise<Response> {
@@ -11,17 +12,29 @@ export class UserService {
     return data;
   }
 
-  async createWallet(walletData: Omit<Wallet, 'id'>): Promise<Response> {
-    const data = await fetch('/api/wallets', {
+  async getWalletsFromUser(userId: number): Promise<Response>{
+    const data = await fetch(`/api/users${userId}/wallets/`)
+    return data;
+  }
+
+  async createWallet(name: string, amount: number, userId: number): Promise<Response> {
+    const walletData: CreateWalletDTO = {
+      user: userId,
+      name: name,
+      balance: amount,
+      allTimeExpenses: 0,
+      allTimeEarnings: 0
+    };
+    const data = await fetch('/api/wallets/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(walletData),
     });
+    
     return data;
-  }
-
+}
   async getUsers(): Promise<Response> {
     const data = await fetch('/api/users');
     return data;
@@ -33,7 +46,7 @@ export class UserService {
   }
 
   async createUser(userData: Omit<User, 'id'>): Promise<Response> {
-    const data = await fetch('/api/users', {
+    const data = await fetch('/api/users/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
