@@ -1,13 +1,9 @@
 from rest_framework import viewsets
-from .models import Wallet, Category, Expense, MonthlyExpense, Income, SavingsGoal
+from .models import Category, Expense, MonthlyExpense, Income, SavingsGoal
 from .serializers import (
-    WalletSerializer, CategorySerializer, ExpenseSerializer, 
+    CategorySerializer, ExpenseSerializer, 
     MonthlyExpenseSerializer, IncomeSerializer, SavingsGoalSerializer
 )
-
-class WalletViewSet(viewsets.ModelViewSet):
-    queryset = Wallet.objects.all()
-    serializer_class = WalletSerializer
 
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()

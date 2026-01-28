@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Navbar } from './components/navbar'
 import { HomePage } from './Pages/homePage';
 import { ProfilePage } from './Pages/profilePage';
+import { LogPage } from './Pages/logPage';
 
 function App() {
   const [screen, setScreen] = useState(0);
@@ -9,7 +10,7 @@ function App() {
   
   const screens = {
     0: <HomePage />,
-    1: <h1>Log Activity</h1>,
+    1: <LogPage />,
     2: <h1>Consult</h1>,
     3: <ProfilePage />,
   };

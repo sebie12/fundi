@@ -6,7 +6,8 @@ export default function WalletForm({ setDone }) {
   const [formData, setFormData] = useState({
     name: '',
     amount: '',
-    userId: ''
+    userId: '',
+    coin: '' 
   });
   
   const [users, setUsers] = useState([]);
@@ -47,7 +48,7 @@ export default function WalletForm({ setDone }) {
     }));
   };
   
-  const handleSubmit = async (e) => {
+   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus({ loading: true, responseCode: null, createdWallet: null });
     
@@ -55,7 +56,8 @@ export default function WalletForm({ setDone }) {
       const response = await userService.createWallet(
         formData.name, 
         parseFloat(formData.amount),
-        parseInt(formData.userId)
+        parseInt(formData.userId),
+        formData.coin 
       );
       
       if (response.ok) {
@@ -65,7 +67,7 @@ export default function WalletForm({ setDone }) {
           responseCode: response.status, 
           createdWallet: wallet 
         });
-        setFormData({ name: '', amount: '', userId: '' });
+        setFormData({ name: '', amount: '', userId: '', coin: '' });
       } else {
         setStatus({ 
           loading: false, 

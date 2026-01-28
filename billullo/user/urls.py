@@ -7,6 +7,5 @@ router.register(r'users', UserViewSet)
 router.register(r'wallets', WalletViewSet)
 
 urlpatterns = [
-   # path('users/<int:user_id>/wallets/', get_user_wallets, name='user-wallets'),
     path('', include(router.urls)),
 ]

@@ -1,10 +1,8 @@
-
-
+import React from 'react'
 export function LogPage() {
   return (
-    <>
-      <Navbar setScreen={setScreen} />
-      {screens[screen]}
-    </>
+    <div className="body">
+      <h2>Log your spendings or earnings</h2>
+    </div>
   )
 }

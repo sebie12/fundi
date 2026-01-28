@@ -1,32 +1,31 @@
-# Fundi
+# Billullo
+
 ### Objectives
-1. **MVP:** Core features for saving and declaring expenses (recurring/monthly or one-time), basic statistics, and a dashboard.    
-2. **Future:** AI integration.
+1. **MVP:** Core features for managing wallets, tracking expenses (one-time & recurring), and viewing financial health.
+2. **Future:** AI integration for smart insights.
+
 ---
+
 ### Data Model
 
-- **Expense:**
-    - Amount
-    - Description
-    - Category (FK)
-- **Recurring/Monthly Expense:**
-    - Amount
-    - Description
-    - Category (FK)
-    - Billing/Deduction Date
-- **Income:**
-    - Amount
-    - Description
-    - Frequency (Monthly, Weekly)
-- **Category:**
-    - Name
-    - Priority Level (1-10)
----
-### Functionalities
-1. **Log an Expense:** Record a one-time transaction.
-2. **Declare a Monthly Expense:** Set up a recurring payment.
-### Calculated Statistics
-- **Net Balance:** Total remaining (positive or negative) at the end of the month.
-- **Low-Priority Spending:** Total spent on items with a priority level of 5 or lower (adjustable threshold).
+![Database Schema](images/model.png)
+
+- **User:** App account holder.
+- **Wallet:** Container for funds (linked to User). Tracks current balance and all-time totals.
+- **Category:** Expense classification with a `Priority Level` (1-10).
+- **Expense:** One-time transaction linked to a specific **Wallet** and **Category**.
+- **Monthly Expense:** Recurring obligation linked to a **Wallet**, with a specific billing date.
+- **Income:** Earnings source linked to a **Wallet**, including frequency.
+- **Savings Goal:** Targets for saving specific amounts by a specific date.
 
 ---
+
+### Functionalities
+1. **Create Wallets:** Manage multiple accounts/funds per user.
+2. **Log Transactions:** Record expenses or income to specific wallets.
+3. **Set Recurring Payments:** Automate monthly obligations.
+
+### Calculated Statistics
+- **Net Balance:** Real-time wallet balance (Income - Expenses).
+- **Low-Priority Spending:** Aggregated spend on categories with priority ≤ 5.
+- **Wallet Health:** Comparison of `alltimeIncome` vs `alltimeExpenses`.

@@ -14,13 +14,14 @@ export function ProfilePage() {
   useEffect(() => {
   const fetchData = async () => {
     try {
-      const response = await userService.getUsers();
+      const response = await userService.getUserById(1);
       
       setResponseCode(response.status);
+      console.log("Response code:", response.status);
       if (response.ok) {
         const data = await response.json();
-        setUserData(data[0]);
-        const responsew = await userService.getWalletsFromUser(data[0].id);
+        setUserData(data);
+        const responsew = await userService.getWalletsFromUser(data.id);
         const dataw = await responsew.json()
         setWalletData(dataw);
       }

@@ -1,10 +1,5 @@
 from rest_framework import serializers
-from .models import Wallet, Category, Expense, MonthlyExpense, Income, SavingsGoal
-
-class WalletSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Wallet
-        fields = '__all__'
+from .models import Category, Expense, MonthlyExpense, Income, SavingsGoal
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
