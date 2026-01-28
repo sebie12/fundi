@@ -12,6 +12,7 @@ class User(models.Model):
 class Wallet(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='wallets')
     name = models.CharField(max_length=150)
+    coin = models.CharField(max_length=1)
     balance = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     alltimeExpenses = models.DecimalField(max_digits=15, decimal_places=2, default=0)
     alltimeIncome = models.DecimalField(max_digits=15, decimal_places=2, default=0)

@@ -100,6 +100,22 @@ export default function WalletForm({ setDone }) {
             />
           </label>
         </div>
+
+        <div className="form-group">
+          <select
+              name="coin"
+              value={formData.coin}
+              onChange={handleInputChange}
+              required
+              disabled={loading}
+              className="form-input"
+            >
+              <option value="">Select a coin</option>
+              <option value="$">USD</option>
+              <option value="€">EUR</option>
+              <option value="£">GBP</option>
+            </select>
+        </div>
         
         <div className="form-group">
           <label className="form-label">

@@ -3,6 +3,7 @@ import "./common.css";
 import {UserService} from "../services/userService";
 import ProfileInfo from "../components/profile/profileInfo";
 import GeneralProfileSetUp from "../components/profile/generalProfileSetUp";
+import WalletForm from "../components/profile/walletForm";
 
 export function ProfilePage() {
   const userService = new UserService();
@@ -14,14 +15,14 @@ export function ProfilePage() {
   const fetchData = async () => {
     try {
       const response = await userService.getUsers();
-      setResponseCode(response.status);
       
+      setResponseCode(response.status);
       if (response.ok) {
         const data = await response.json();
-        setUserData(data);
-        
-        
-        
+        setUserData(data[0]);
+        const responsew = await userService.getWalletsFromUser(data[0].id);
+        const dataw = await responsew.json()
+        setWalletData(dataw);
       }
     } catch (error) {
       console.error('Error fetching user data:', error);
@@ -34,25 +35,27 @@ export function ProfilePage() {
   
   return (
     <div className="body">
-      <div>
-        {responseCode === 0 && (
-          <p>Loading...</p>
-        )}
-        
-        {responseCode === 200 && userData && (
+      {responseCode === 0 && (
+        <p>Loading...</p>
+      )}
+      
+      {responseCode === 200 && userData && (
+        walletData && walletData.length === 0 ? (
+          <WalletForm/>
+        ) : (
           <ProfileInfo userData={userData} walletData={walletData} />
-        )}
-        
-        {responseCode === 404 && (
-          <div>
-            <GeneralProfileSetUp/>
-          </div>
-        )}
-        
-        {responseCode !== 0 && responseCode !== 200 && responseCode !== 404 && (
-          <p>Error loading profile. (Status: {responseCode})</p>
-        )}
-      </div>
+        )
+      )}
+      
+      {responseCode === 404 && (
+        <div>
+          <GeneralProfileSetUp/>
+        </div>
+      )}
+      
+      {responseCode !== 0 && responseCode !== 200 && responseCode !== 404 && (
+        <p>Error loading profile. (Status: {responseCode})</p>
+      )}  
     </div>
   );
 }

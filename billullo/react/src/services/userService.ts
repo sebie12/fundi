@@ -13,15 +13,16 @@ export class UserService {
   }
 
   async getWalletsFromUser(userId: number): Promise<Response>{
-    const data = await fetch(`/api/users${userId}/wallets/`)
+    const data = await fetch(`/api/users/${userId}/wallets/`)
     return data;
   }
 
-  async createWallet(name: string, amount: number, userId: number): Promise<Response> {
+  async createWallet(name: string, amount: number, userId: number, coin: string): Promise<Response> {
     const walletData: CreateWalletDTO = {
       user: userId,
       name: name,
       balance: amount,
+      coin: coin,
       allTimeExpenses: 0,
       allTimeEarnings: 0
     };
@@ -36,7 +37,7 @@ export class UserService {
     return data;
 }
   async getUsers(): Promise<Response> {
-    const data = await fetch('/api/users');
+    const data = await fetch('/api/users/');
     return data;
   }
 

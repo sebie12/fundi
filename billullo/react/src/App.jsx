@@ -5,8 +5,8 @@ import { ProfilePage } from './Pages/profilePage';
 
 function App() {
   const [screen, setScreen] = useState(0);
-
-  // Define your screens here
+  const [username, SetUsername] = useState('');
+  
   const screens = {
     0: <HomePage />,
     1: <h1>Log Activity</h1>,
