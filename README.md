@@ -8,7 +8,7 @@
 
 ### Data Model
 
-![Database Schema](images/model.png)
+![Database Schema](images/image.png)
 
 - **User:** App account holder.
 - **Wallet:** Container for funds (linked to User). Tracks current balance and all-time totals.

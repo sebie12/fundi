@@ -16,19 +16,9 @@ class Expense(models.Model):
     title = models.CharField(max_length=100)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     date_incurred = models.DateField()
-
+    isMonthly = models.BooleanField(default=False)
     def __str__(self):
         return f"{self.title} - {self.amount}"
-
-class MonthlyExpense(models.Model):
-    wallet = models.ForeignKey('user.Wallet', on_delete=models.CASCADE, related_name='monthly_expenses')
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    description = models.CharField(max_length=200)
-    amount = models.DecimalField(max_digits=10, decimal_places=2)
-    billingDate = models.DateField()
-
-    def __str__(self):
-        return f"{self.description} - {self.amount}"
 
 class Income(models.Model):
     wallet = models.ForeignKey('user.Wallet', on_delete=models.CASCADE, related_name='incomes')

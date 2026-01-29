@@ -14,6 +14,37 @@ export interface Wallet {
   allTimeEarnings: number;
 }
 
+export interface Category{
+  id:number;
+  name:string;
+  priorityLevel:number;
+}
+
+export interface Expense{
+  id:number;
+  title: string;
+  amount: number;
+  date: string;
+  isMonthly: Boolean;
+  walletId: number;
+  category: number;
+}
+export interface Income{
+  id:number;
+  source: string;
+  amount: number;
+  date: string;
+  frequency: string;
+  wallet: number;
+}
+export interface savingGoal{
+    id:number;
+    name: string;
+    target: number;
+    currentAmount: number;
+    date: string;
+    user: number;
+}
 export interface ApiResponse<T> {
   data: T;
   message?: string;

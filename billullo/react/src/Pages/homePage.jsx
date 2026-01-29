@@ -3,27 +3,14 @@ import {
     useEffect,
     useState
     } from "react"
+import './common.css'
+import ExpenseForm from '../components/data/expenseForm'
 
 export function HomePage() {
     const [profile, setProfile] = useState(null);
-    useEffect(() => {
-        const fetchProfile = async () => {
-            try {
-                const response = await fetch('/api/users');
-                const data = await response.json();
-                setProfile(data[0]);
-            } catch (error) {
-                console.error('Error fetching profile:', error);
-            }
-        };
-        fetchProfile();
-    }, [])
-  return (
-    <>
-        {
-        profile != null ? <h2>Welcome back, {profile.username}!</h2>
-        : <h2>Welcome to billullo! <br/>Please Set up your profile.</h2>
-        }
-    </>
-  )
+    return (
+        <div className='body'>
+            <ExpenseForm/>
+        </div>
+    )
 }
