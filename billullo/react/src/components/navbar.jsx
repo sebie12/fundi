@@ -13,8 +13,9 @@ export function Navbar({ setScreen }) {
       <div className="tabs">
         <a onClick={() => setScreen(1)} >Log Activity</a>
         <a onClick={() => setScreen(2)}>Consult</a>
+        <a onClick={() => setScreen(3)}>Goals</a>
       </div>
-      <a onClick={() => setScreen(3)}><ProfileFrame /></a>
+      <a onClick={() => setScreen(4)}><ProfileFrame /></a>
     </div>
   )
 }

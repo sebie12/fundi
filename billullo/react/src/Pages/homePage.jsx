@@ -4,13 +4,12 @@ import {
     useState
     } from "react"
 import './common.css'
-import ExpenseForm from '../components/data/expenseForm'
 
 export function HomePage() {
     const [profile, setProfile] = useState(null);
     return (
         <div className='body'>
-            <ExpenseForm/>
+            <h1>Welcome to Billullo</h1>
         </div>
     )
 }

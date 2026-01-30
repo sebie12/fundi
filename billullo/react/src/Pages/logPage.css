@@ -1,6 +1,40 @@
-.body{
+.log-outer-container{
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 10px;
+}
+
+.log-container{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    width: 50%;
+}
+
+.navBar{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%; /* Make navbar full width */
+    margin-bottom: 20px; /* Add some spacing */
+}
+
+.navBar .navBarItem{
+    border: 5px;
+    border-color: aliceblue;
+    border-radius: 0;
+    flex-grow: 1;
+}
+.navBar .navBarItem.left{
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+}
+.navBar .navBarItem.right{
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.navBar .navBarItem.selected{
+    color: black;
+    background-color: #646cff;
+    border-color: #646cff;
 }

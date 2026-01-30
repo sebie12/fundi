@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { DataService } from '../../services/dataService'
 import { UserService } from '../../services/userService'
-import './expenseForm.css'
+//import './expenseForm.css'
+import '../utils/form.css'
 
 export default function ExpenseForm() {
   const dataService = new DataService()
@@ -10,10 +11,10 @@ export default function ExpenseForm() {
   const [formData, setFormData] = useState({
     title: '',
     amount: '',
-    dateIncurred: '',
+    date: '',           // Changed from dateIncurred
     isMonthly: false,
-    walletId: '',
-    categoryId: ''
+    wallet: '',         // Changed from walletId
+    category: ''        // Changed from categoryId
   })
   
   const [wallets, setWallets] = useState([])
@@ -53,56 +54,59 @@ export default function ExpenseForm() {
     const { name, value, type, checked } = e.target;
     setFormData(prev => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : value
+      [name]: value
     }));
   }
   
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setStatus({ loading: true, responseCode: null, createdExpense: null });
+  e.preventDefault();
+  setStatus({ loading: true, responseCode: null, createdExpense: null });
+  
+  try {
+    const response = await dataService.createExpense(
+      formData.title,
+      parseFloat(formData.amount),
+      formData.date,
+      formData.type,
+      parseInt(formData.wallet),
+      parseInt(formData.category)
+    )
     
-    try {
-      const response = await dataService.createExpense(
-        formData.title,
-        formData.amount,
-        formData.dateIncurred,
-        formData.isMonthly,
-        formData.walletId,
-        formData.categoryId
-      )
+    if (response.ok) {
+      const expense = await response.json();
+      setStatus({ 
+        loading: false, 
+        responseCode: response.status,
+        createdExpense: expense
+      });
+      setFormData({ 
+        title: '', 
+        amount: '', 
+        date: '',
+        type: '', 
+        wallet: '', 
+        category: '' 
+      });
+    } else {
+      const errorData = await response.json();
+      console.error('Error details:', errorData);
       
-      if (response.ok) {
-        const expense = await response.json();
-        setStatus({ 
-          loading: false, 
-          responseCode: response.status,
-          createdExpense: expense
-        });
-        setFormData({ 
-          title: '', 
-          amount: '', 
-          dateIncurred: '', 
-          isMonthly: false, 
-          walletId: '', 
-          categoryId: '' 
-        });
-      } else {
-        setStatus({ 
-          loading: false, 
-          responseCode: response.status,
-          createdExpense: null
-        });
-      }
-    } catch (error) {
-      console.error('Error creating expense:', error);
-      setStatus({ loading: false, responseCode: 500, createdExpense: null });
+      setStatus({ 
+        loading: false, 
+        responseCode: response.status,
+        createdExpense: null
+      });
     }
-  };
+  } catch (error) {
+    console.error('Error creating expense:', error);
+    setStatus({ loading: false, responseCode: 500, createdExpense: null });
+  }
+};
   
   return (
-    <div className="expense-form-container">
-      <form onSubmit={handleSubmit} className="expense-form">
-        <div className="form-row">
+    <div className="form-container">
+      <form onSubmit={handleSubmit} className="form">
+        <div className="form-group">
           <label className="form-label">Title</label>
           <input
             type="text"
@@ -116,7 +120,7 @@ export default function ExpenseForm() {
           />
         </div>
         
-        <div className="form-row">
+        <div className="form-group">
           <label className="form-label">Amount</label>
           <input
             type="number"
@@ -132,12 +136,12 @@ export default function ExpenseForm() {
           />
         </div>
         
-        <div className="form-row">
+        <div className="form-group">
           <label className="form-label">Date incurred</label>
           <input
             type="date"
-            value={formData.dateIncurred}
-            name="dateIncurred"
+            value={formData.date}           
+            name="date"                     
             onChange={handleInputChange}
             required
             disabled={status.loading}
@@ -145,23 +149,28 @@ export default function ExpenseForm() {
           />
         </div>
         
-        <div className="form-row">
-          <label className="form-label">IsMonthly</label>
-          <input
-            type="checkbox"
-            checked={formData.isMonthly}
-            name="isMonthly"
+        <div className="form-group">
+          <label className="form-label">Type of payment</label>
+          <select
+            value={formData.type}         
+            name="type"                    
             onChange={handleInputChange}
+            required
             disabled={status.loading}
-            className="form-checkbox"
-          />
+            className="form-select"
+          >
+            <option value="One-time">One time</option>
+            <option value="Daily">Daily</option>
+            <option value="Weekly">Weekly</option>
+            <option value="Monthly">Monthly</option>
+          </select>
         </div>
         
-        <div className="form-row">
+        <div className="form-group">
           <label className="form-label">Wallet</label>
           <select
-            value={formData.walletId}
-            name="walletId"
+            value={formData.wallet}         // Changed from walletId
+            name="wallet"                    // Changed from walletId
             onChange={handleInputChange}
             required
             disabled={status.loading}
@@ -176,11 +185,11 @@ export default function ExpenseForm() {
           </select>
         </div>
         
-        <div className="form-row">
+        <div className="form-group">
           <label className="form-label">Category</label>
           <select
-            value={formData.categoryId}
-            name="categoryId"
+            value={formData.category}       // Changed from categoryId
+            name="category"                  // Changed from categoryId
             onChange={handleInputChange}
             required
             disabled={status.loading}
@@ -195,14 +204,11 @@ export default function ExpenseForm() {
           </select>
         </div>
         
-        <div className="form-actions">
           <button type="submit" disabled={status.loading} className="submit-button">
-            {status.loading ? 'Loading...' : 'Post'}
+            {status.loading ? 'Loading...' : 'Create'}
           </button>
-        </div>
       </form>
       
-      {/* Response Messages */}
       {status.loading && (
         <p className="message loading-message">Creating expense...</p>
       )}
@@ -212,7 +218,7 @@ export default function ExpenseForm() {
           <p className="message-title">✓ Expense created successfully!</p>
           <p>Title: {status.createdExpense.title}</p>
           <p>Amount: ${status.createdExpense.amount}</p>
-          <p>Date: {status.createdExpense.dateIncurred}</p>
+          <p>Date: {status.createdExpense.date}</p>  {/* Changed from dateIncurred */}
         </div>
       )}
       

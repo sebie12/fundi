@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { UserService } from "../../services/userService";
-import "./walletForm.css";
+//import "./walletForm.css";
+import '../utils/form.css'
 
 export default function WalletForm({ setDone }) {
   const [formData, setFormData] = useState({
@@ -84,8 +85,8 @@ export default function WalletForm({ setDone }) {
   const { loading, responseCode, createdWallet } = status;
   
   return (
-    <div className="wallet-form-container">
-      <form onSubmit={handleSubmit} className="wallet-form">
+    <div className="form-container">
+      <form onSubmit={handleSubmit} className="form">
         <div className="form-group">
           <label className="form-label">
             Name:

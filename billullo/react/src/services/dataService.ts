@@ -11,7 +11,7 @@ export class DataService{
             name: name,
             priorityLevel: priorityLevel
         }
-        const data = await fetch('/api/wallets/', {
+        const data = await fetch('/api/categories/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -22,30 +22,30 @@ export class DataService{
     }
 
     async createExpense(
-        
         title: string,
         amount: number,
         date: string,
-        isMonthly: Boolean,
+        type: string,
         walletId: number,
         category: number
-
-    ):Promise<Response>{
-        const expenseData : CreateExpenseDTO = {
+        ): Promise<Response> {
+        const expenseData: CreateExpenseDTO = {
             title: title,
-            amount:amount,
-            date: date,
-            isMonthly: isMonthly,
-            walletId: walletId,
+            amount: amount,
+            date_incurred: date,        
+            type: type,     
+            wallet: walletId,
             category: category
         }
-        const data = fetch('/api/expenses', {
+        
+        const data = await fetch('/api/expenses/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(expenseData),
         })
+        
         return data
     }
 

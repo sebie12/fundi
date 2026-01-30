@@ -24,9 +24,9 @@ export interface Expense{
   id:number;
   title: string;
   amount: number;
-  date: string;
-  isMonthly: Boolean;
-  walletId: number;
+  date_incurred: string;
+  type: string;
+  wallet: number;
   category: number;
 }
 export interface Income{

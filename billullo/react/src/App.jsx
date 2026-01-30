@@ -12,7 +12,8 @@ function App() {
     0: <HomePage />,
     1: <LogPage />,
     2: <h1>Consult</h1>,
-    3: <ProfilePage />,
+    3:  <h1>Goals</h1>,
+    4: <ProfilePage />,
   };
 
   return (

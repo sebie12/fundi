@@ -1,20 +1,19 @@
 
+html, body, #root {
+  height: 100%;
+  margin: 0;
+}
+
 body, #root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
   width: 100%;
-  display: flex;
+  display: block;
   max-width: none;
-  margin: 0;
-  display: block; /* Remove display: flex if present */
-
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
-
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;

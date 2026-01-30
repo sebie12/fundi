@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { DataService } from '../../services/dataService'
+import '../utils/form.css'
 
 export default function CategoryForm() {
   const dataService = new DataService()
@@ -30,7 +31,7 @@ export default function CategoryForm() {
     try {
       const response = await dataService.createCategory(
         formData.name,
-        formData.priorityLevel
+        parseInt(formData.priorityLevel)
       )
       
       if (response.ok) {
