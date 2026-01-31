@@ -10,6 +10,7 @@ class ExpenseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Expense
         fields = '__all__'
+        read_only_fields = ['id', 'last_deduction_date']
 
 class IncomeSerializer(serializers.ModelSerializer):
     class Meta:

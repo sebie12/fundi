@@ -159,18 +159,17 @@ export default function ExpenseForm() {
             disabled={status.loading}
             className="form-select"
           >
-            <option value="One-time">One time</option>
-            <option value="Daily">Daily</option>
-            <option value="Weekly">Weekly</option>
-            <option value="Monthly">Monthly</option>
+            <option value="one-time">One time</option>
+            <option value="weekly">Weekly</option>
+            <option value="monthly">Monthly</option>
           </select>
         </div>
         
         <div className="form-group">
           <label className="form-label">Wallet</label>
           <select
-            value={formData.wallet}         // Changed from walletId
-            name="wallet"                    // Changed from walletId
+            value={formData.wallet}         
+            name="wallet"
             onChange={handleInputChange}
             required
             disabled={status.loading}

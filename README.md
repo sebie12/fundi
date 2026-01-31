@@ -29,3 +29,10 @@
 - **Net Balance:** Real-time wallet balance (Income - Expenses).
 - **Low-Priority Spending:** Aggregated spend on categories with priority ≤ 5.
 - **Wallet Health:** Comparison of `alltimeIncome` vs `alltimeExpenses`.
+
+### Future Tasks (When App is Working):
+- [ ] Dockerize backend
+- [ ] Set up production database
+- [ ] Configure Nginx
+- [ ] Build Electron/WebView wrapper
+- [ ] Deploy to server

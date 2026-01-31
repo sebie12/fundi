@@ -3,6 +3,7 @@ from rest_framework.decorators import api_view, action
 from rest_framework.response import Response
 from django.db import transaction
 from user.models import Wallet
+from django.utils import timezone
 from .models import Category, Expense, Income, SavingsGoal
 from .serializers import (
     CategorySerializer, ExpenseSerializer, 
@@ -23,7 +24,7 @@ class ExpenseViewSet(viewsets.ModelViewSet):
         
         wallet = serializer.validated_data.get('wallet')
         amount = serializer.validated_data.get('amount')
-        
+        type = serializer.validated_data.get('type')
         with transaction.atomic():
 
             wallet = Wallet.objects.select_for_update().get(pk=wallet.id)
@@ -37,14 +38,19 @@ class ExpenseViewSet(viewsets.ModelViewSet):
             wallet.balance -= amount
             wallet.save()
             
-            self.perform_create(serializer)
-        
+            # self.perform_create(serializer)
+            expense = serializer.save()
+            if type in ['weekly', 'monthly']:
+                expense.last_deduction_date = timezone.now().date()
+                expense.save()
+
         headers = self.get_success_headers(serializer.data)
         return Response(
             serializer.data,
             status=status.HTTP_201_CREATED,
             headers=headers
         )
+
 
 class IncomeViewSet(viewsets.ModelViewSet):
     queryset = Income.objects.all()

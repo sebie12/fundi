@@ -21,13 +21,14 @@ export interface Category{
 }
 
 export interface Expense{
-  id:number;
+  id: number;
   title: string;
   amount: number;
   date_incurred: string;
-  type: string;
+  type: 'one-time' | 'weekly' | 'monthly'; 
   wallet: number;
   category: number;
+  last_deduction_date?: string;
 }
 export interface Income{
   id:number;
