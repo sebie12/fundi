@@ -1,1 +1,19 @@
-
+.withSidebar{
+    display: flex;
+    flex-direction: row;
+    height: 100vh;  
+}
+.withSidebar .mainbar{
+    flex: 4;  
+}
+.withSidebar .sidebar{
+    display: flex; 
+    flex: 1;
+    flex-direction: column;
+    overflow-y: scroll;
+    background-color: #0e1313;
+}
+.withoutSidebar{
+    display: flex;
+    flex-direction: column;
+}

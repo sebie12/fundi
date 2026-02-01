@@ -1,0 +1,15 @@
+.walletButton{
+    margin: 1rem 3rem;
+    border: 3px solid transparent;
+    transition: all 100ms;
+}
+.walletButton.selected{ 
+    background-color: #f9f9f9;
+    color: black;
+}
+.walletButton .name{
+    font-size: 1.2rem;
+}
+.walletButton .balance{  /* Change this from .walletButton */
+    font-size: 2rem;
+}
